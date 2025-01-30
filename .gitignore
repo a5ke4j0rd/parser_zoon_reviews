@@ -15,4 +15,4 @@ env.bak/
 venv.bak/
 
 # JetBrains module
-.idea/
+.idea
