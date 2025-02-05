@@ -15,7 +15,7 @@ class Parser:
     def __get_response(self):
         response = requests.get(self.url, headers=Parser.__headers, timeout=5)
         soup = BeautifulSoup(response.text, 'lxml')
-        data = soup.find('div', class_='service-block-content')
+        data = soup.find('ul', class_='list-reset feedbacks-new js-feedbacks-new js-comment-list')
         return data
 
     def _get_author(self):
