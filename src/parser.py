@@ -15,7 +15,7 @@ class Parser:
     def __get_response(self):
         response = requests.get(self.url, headers=Parser.__headers, timeout=5)
         soup = BeautifulSoup(response.text, 'lxml')
-        data = soup.find('ul', class_='list-reset feedbacks-new js-feedbacks-new js-comment-list')
+        data = soup.find('div', class_='service-block-content')
         return data
 
     def _get_author(self):
@@ -36,6 +36,7 @@ class Parser:
 
     def _get_text_review(self):
         data = self.__get_response()
-        review_container = data.find('div', class_='comment-item__wrapper js-comment-container-wrapper')
-        review_text = review_container.find('span', class_='js-comment-content').text # .split() - for search method
-        return review_text
+        for text in data:
+                review_container = text.find('div', class_='comment-item__wrapper js-comment-container-wrapper')
+                review_text = review_container.find('span', class_='js-comment-content').text # .split() - for search method
+                print(review_text)
