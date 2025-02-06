@@ -36,7 +36,10 @@ class Parser:
 
     def _get_text_review(self):
         data = self.__get_response()
-        for text in data:
-                review_container = text.find('div', class_='comment-item__wrapper js-comment-container-wrapper')
-                review_text = review_container.find('span', class_='js-comment-content').text # .split() - for search method
+        if data:
+            reviews = data.find_all('div', class_='z-flex z-flex--column z-gap--4 js-comment-part')
+            for review in reviews:
+                review_text = review.find('span', class_='js-comment-content').text.strip()
                 print(review_text)
+        else:
+            print("Отзывы не найдены.")
