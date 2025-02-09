@@ -4,4 +4,5 @@ from parser import Parser
 if __name__ == '__main__':
     zoon = Parser('https://zoon.ru/msk/medical/meditsinskij_tsentr_sanprovi/')
     # zoon._get_text_review()
-    zoon._get_author()
+    # zoon._get_author()
+    zoon._get_stars()

@@ -1,4 +1,3 @@
-import bs4.element
 import requests
 from bs4 import BeautifulSoup
 
@@ -18,15 +17,22 @@ class Parser:
         data = soup.find('ul', class_='list-reset feedbacks-new js-feedbacks-new js-comment-list')
         return data
 
+    def _get_stars(self):
+        data = self.__get_response()
+        if data:
+            stars = data.find_all('div', {'data-uitest':'personal-mark'})
+            for star in stars:
+                print(star.text)
+
     def _get_author(self):
         data = self.__get_response()
         if data:
-            reviews = data.find_all('div', class_='z-text--16 z-text--bold')
-            for review in reviews:
-                review_text = review.find('span', {'itemprop': 'name'}).text.strip()
-                print(review_text)
+            authors = data.find_all('span', {'itemscope':'', 'itemtype':'https://schema.org/Person'})
+            for author in authors:
+                author_name = author.find('span').text.strip()
+                print(author_name)
         else:
-            print("Отзывы не найдены.")
+            print("Authors not found")
 
     def _get_text_review(self):
         data = self.__get_response()
@@ -36,4 +42,4 @@ class Parser:
                 review_text = review.find('span', class_='js-comment-content').text.strip()
                 print(review_text)
         else:
-            print("Отзывы не найдены.")
+            print("Reviews not found")
