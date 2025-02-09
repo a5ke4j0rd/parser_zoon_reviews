@@ -20,24 +20,18 @@ class Parser:
 
     def _get_author(self):
         data = self.__get_response()
-
-        for review_cards in data:
-            if isinstance(review_cards, bs4.element.Tag):
-                review_content = review_cards.find('div', class_='comment-item__wrapper js-comment-container-wrapper')
-
-                if isinstance(review_content, bs4.element.Tag):
-                    review_text = review_content.find('span', class_='js-comment-content')
-                    print(review_text.text)
-                else:
-                    continue
-            else:
-                continue
-        return
+        if data:
+            reviews = data.find_all('div', class_='z-text--16 z-text--bold')
+            for review in reviews:
+                review_text = review.find('span', {'itemprop': 'name'}).text.strip()
+                print(review_text)
+        else:
+            print("Отзывы не найдены.")
 
     def _get_text_review(self):
         data = self.__get_response()
         if data:
-            reviews = data.find_all('div', class_='z-flex z-flex--column z-gap--4 js-comment-part')
+            reviews = data.find_all('div', {'data-uitest': 'comment-details-text'})
             for review in reviews:
                 review_text = review.find('span', class_='js-comment-content').text.strip()
                 print(review_text)
