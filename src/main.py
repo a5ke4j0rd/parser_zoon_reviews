@@ -1,4 +1,5 @@
 from parser import *
+from bot import *
 
 # url = input('Enter URL: ')  # 'https://zoon.ru/msk/medical/meditsinskij_tsentr_sanprovi/'
 if __name__ == '__main__':
