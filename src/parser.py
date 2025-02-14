@@ -34,7 +34,7 @@ class AuthorParser(DataParser):
 
 class ReviewParser(DataParser):
     def parse(self, data):
-        reviews = data.find_all('div', {'data-uitest': 'comment-details-text'})
+        reviews = data.find_all('div', {'class': 'z-flex z-flex--column z-gap--4 js-comment-part'})
         return [review.find('span', class_='js-comment-content').text.strip() for review in reviews]
 
 class Parser:
@@ -53,6 +53,8 @@ class Parser:
             stars = self.parsers[0].parse(feedbacks)
             authors = self.parsers[1].parse(feedbacks)
             reviews = self.parsers[2].parse(feedbacks)
+            reviews = [reviews[review: review + 3] for review in range(0, len(reviews), 3)]
+            reviews = [[item.replace('\xa0', ' ') for item in sublist] for sublist in reviews]
 
             for i, (author, star, review) in enumerate(zip(authors, stars, reviews), 1):
                 results[i] = [author, star, review]
