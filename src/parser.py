@@ -35,17 +35,17 @@ class HtmlLoader:
                                     proxies=self.proxy,
                                     timeout=10)
             ip_data = response.json()
-            print(f"Текущий IP через прокси: {ip_data['ip']}")
+            print(f"Current IP via proxy: {ip_data['ip']}")
             return True
         except Exception as e:
-            print(f"Прокси не работает! Ошибка: {e}")
+            print(f"Proxy not working! Error: {e}")
             return False
 
 
     # --- LOADING RESPONSE ---
 
     def load(self):
-        print(self.__check_proxy_connection())
+        # print(self.__check_proxy_connection()) FOR DEBUG
         time.sleep(random.uniform(2, 4))
         response = requests.get(self.url, headers=self.headers,
                                 proxies=self.proxy, timeout=10)

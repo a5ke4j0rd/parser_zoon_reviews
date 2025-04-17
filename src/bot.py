@@ -34,7 +34,7 @@ async def send_reviews(chat_id):
 
                 await bot.send_message(
                     chat_id,
-                    f"\U0001F4DD Отзыв #{idx}\n\n"
+                    f"\U0001F4DD Review #{idx}\n\n"
                     f"⭐ Stars: {data.get('rating', 'N/A')}\n"
                     f"👤 Author: {data.get('author', 'N/A')}\n"
                     f"📅 Date: {data.get('date', 'N/A')}\n"

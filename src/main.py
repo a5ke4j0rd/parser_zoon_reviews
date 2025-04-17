@@ -1,4 +1,4 @@
-from parser import *
+from parser import Parser
 from bot import *
 
 async def main():
